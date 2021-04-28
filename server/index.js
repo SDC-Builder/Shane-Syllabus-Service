@@ -30,6 +30,14 @@ app.get('/api/syllabus/:courseNumber', (req, res) => {
   });
 });
 
+app.get('/api/svg/:svgName', (req, res) => {
+  res.send(JSON.stringify(svgs[req.params.svgName]));
+});
+
+app.get('/api/svgs', (req, res) => {
+  res.send(JSON.stringify(svgs));
+});
+
 app.listen(port, () => {
   console.log(`Syllabus service listening at http://localhost:${port}`);
 });
