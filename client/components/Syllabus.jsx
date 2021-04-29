@@ -45,7 +45,7 @@ class Syllabus extends React.Component {
       .catch((err) => { if (err) { console.error('Error in GET starReviews', err); } });
   }
 
-  //sets initial state, then sets courseNumber from window, then fetches data
+  // sets initial state, then sets courseNumber from window, then fetches data
   componentDidMount() {
     const courseNumber = window.location.pathname.split('/')[1] || 1;
     this.setState({ courseNumber }, () => { this.fetches(); });

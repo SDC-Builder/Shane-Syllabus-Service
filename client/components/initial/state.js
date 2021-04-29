@@ -13,24 +13,24 @@ module.exports = {
           videoIndex: 0,
           videoTitle: '',
           videoLengthMinutes: 0,
-          videoLengthSeconds: 0
+          videoLengthSeconds: 0,
         }],
         videosLength: 0,
         readings: [{
           readingIndex: 0,
           readingTitle: '',
-          readingLengthMinutes: 0
+          readingLengthMinutes: 0,
         }],
         readingsLength: 0,
         exercises: [{
           exerciseIndex: 0,
           exerciseTitle: '',
-          exerciseLengthMinutes: ''
+          exerciseLengthMinutes: '',
         }],
-        exercisesLength: 0
-      }]
+        exercisesLength: 0,
+      }],
     }],
-    hoursToCompleteCourse: 0
+    hoursToCompleteCourse: 0,
   },
   svgsData: {
     bookSVG: '',
@@ -38,21 +38,21 @@ module.exports = {
     careerDirectionSVG: '',
     careerPromotionSVG: {
       outside: '',
-      inside: ''
+      inside: '',
     },
     deadlinesSVG: '',
     exercisesSVG: '',
     hoursSVG: '',
     infoSVG: {
       i: '',
-      circle: ''
+      circle: '',
     },
     instructorSVG: '',
     languagesSVG: '',
     learnersSVG: '',
     levelSVG: {
       first: '',
-      second: ''
+      second: '',
     },
     onlineSVG: '',
     readingsSVG: '',
@@ -62,16 +62,17 @@ module.exports = {
     thumbSVG: '',
     userSVG: {
       body: '',
-      head: ''
+      head: '',
     },
-    videosSVG: ''
+    videosSVG: '',
   },
   positiveReviews: '3.14%',
   reviewCount: 420,
   syllabusPort: '3005',
-  servicesURL: '54.176.19.199',
-  imagesPort: 3006,
-  reviewsURL: '3.139.47.159',
+  // servicesURL: '54.176.19.199',
+  servicesURL: 'localhost',
+  imagesPort: 3005,
+  // reviewsURL: '3.139.47.159',
   reviewsPort: 80,
-  courseNumber: 1
+  courseNumber: 1,
 };
