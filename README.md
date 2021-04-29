@@ -1,6 +1,6 @@
-# Project Name
-
-> Ingenuity
+# Syllabus
+[![Coverage Status](https://coveralls.io/repos/github/SDC-Builder/Shane-Syllabus-Service/badge.svg?branch=cleanup)](https://coveralls.io/github/SDC-Builder/Shane-Syllabus-Service?branch=cleanup)
+[![Build Status](https://travis-ci.com/SDC-Builder/Shane-Syllabus-Service.svg?branch=master)](https://travis-ci.com/SDC-Builder/Shane-Syllabus-Service)
 
 ## Related Projects
 

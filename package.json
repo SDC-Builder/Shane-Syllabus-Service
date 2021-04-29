@@ -10,6 +10,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "test": "jest",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "test-dev": "jest --watch",
     "react-dev": "webpack --watch",
     "build": "webpack",
@@ -38,6 +39,7 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
+    "coveralls": "^3.1.0",
     "css-loader": "^5.1.2",
     "eslint": "^7.21.0",
     "eslint-config-airbnb": "^18.2.1",

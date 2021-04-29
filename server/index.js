@@ -8,12 +8,12 @@ const port = 3005;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static('./jsmithSyllabusesService/public'));
+app.use(express.static('./public'));
 app.use(cors());
 
 app.get('/:courseNumber', (req, res) => {
   // console.log('GET / courseNumber: ', courseNumber);
-  res.sendFile(path.resolve('./jsmithSyllabusesService/public/index.html'));
+  res.sendFile(path.resolve('./public/index.html'));
 });
 
 app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
