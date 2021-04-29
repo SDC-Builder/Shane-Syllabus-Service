@@ -25,7 +25,7 @@ app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
 
 app.get('/api/syllabus/:courseNumber', (req, res) => {
   // console.log('GET /api/syllabus courseNumber: ', courseNumber);
-  db.syllabus(req.params.courseNumber, (responseData) => {
+  db.rest.get(req.params.courseNumber, (responseData) => {
     res.send(responseData);
   });
 });
