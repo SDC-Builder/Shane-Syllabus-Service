@@ -15,7 +15,7 @@ const hoursToComplete = (courseNumber, cb) => {
 };
 
 const syllabus = (courseNumber, cb) => {
-  const options = {id: courseNumber};
+  const options = { id: courseNumber };
   SyllabusModel.findOne(options)
     .then((syllabusData) => {
       cb(syllabusData);
@@ -27,5 +27,21 @@ const syllabus = (courseNumber, cb) => {
     });
 };
 
-module.exports.hoursToComplete = hoursToComplete;
-module.exports.syllabus = syllabus;
+const rest = {
+  get: (courseNumber, cb) => {
+    const options = { id: courseNumber };
+    SyllabusModel.findOne(options)
+      .then((syllabusData) => {
+        cb(syllabusData);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
+};
+
+module.exports = {
+  hoursToComplete,
+  syllabus,
+  rest,
+};
