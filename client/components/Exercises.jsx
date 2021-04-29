@@ -7,7 +7,7 @@ const Exercises = (props) => (
     <div className="exercises-count">
       <div className="exercises-svg plain-svg">
         <svg viewBox="0 0 48 48">
-          <path d={props.exercisesSVG}></path>
+          <path d={props.exercisesSVG} />
         </svg>
       </div>
       <div className="exercises-count-text">
