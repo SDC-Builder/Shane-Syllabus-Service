@@ -10,6 +10,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "test": "jest",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "test-dev": "jest --watch",
     "react-dev": "webpack --watch",
     "build": "webpack",
