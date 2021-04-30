@@ -32,19 +32,31 @@ app.get('/api/syllabus/:courseNumber', (req, res) => {
   });
 });
 
-app.post('/api/syllabus', (req, res) => {
-  console.log('Post Received');
-  res.sendStatus(201);
+app.post('/api/syllabus', async (req, res) => {
+  if (req.body) {
+    await db.rest.post(req.body);
+    res.sendStatus(201);
+  } else {
+    res.send(400);
+  }
 });
 
-app.put('/api/syllabus', (req, res) => {
-  console.log('Put');
-  res.sendStatus(200);
+app.put('/api/syllabus', async (req, res) => {
+  if (req.body) {
+    await db.rest.update(req.body.id, req.body);
+    res.sendStatus(202);
+  } else {
+    res.sendStatus(400);
+  }
 });
 
-app.delete('/api/syllabus', (req, res) => {
-  console.log('Delete');
-  res.sendStatus(200);
+app.delete('/api/syllabus', async (req, res) => {
+  if (req.body) {
+    await db.rest.delete(req.body.id);
+    res.sendStatus(202);
+  } else {
+    res.sendStatus(400);
+  }
 });
 
 app.get('/api/svg/:svgName', (req, res) => {

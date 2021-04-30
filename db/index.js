@@ -38,6 +38,21 @@ const rest = {
         console.error(err);
       });
   },
+
+  post: async (courseInformation) => {
+    const response = await SyllabusModel.create(courseInformation);
+    return response;
+  },
+
+  update: async (id, newInformation) => {
+    const response = await SyllabusModel.findOneAndUpdate({ id }, { ...newInformation });
+    return response;
+  },
+
+  delete: async (id) => {
+    const response = await SyllabusModel.deleteOne({ id });
+    return response;
+  },
 };
 
 module.exports = {
