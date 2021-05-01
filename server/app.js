@@ -6,7 +6,6 @@ const db = require('../db/index.js');
 const svgs = require('./svgs');
 
 const app = express();
-const port = 3005;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -19,7 +18,7 @@ app.get('/:courseNumber', (req, res) => {
 });
 
 app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
-  // console.log('GET /api/hoursToComplete courseNumber: ', courseNumber);
+  // console.log('GET /api/hoursToComplete courseNumber: ', req.params.courseNumber);
   db.hoursToComplete(req.params.courseNumber, (responseData) => {
     res.send(responseData);
   });
