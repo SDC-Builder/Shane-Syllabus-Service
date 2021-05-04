@@ -8,7 +8,10 @@ const MONGO_HOSTNAME = process.env.MONGO_HOSTNAME || 'localhost';
 const MONGO_PORT = process.env.MONGO_PORT || 27017;
 const MONGO_DB = process.env.MONGO_DB || 'syllabuses';
 
-mongoose.connect(`mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`, { useNewUrlParser: true, useUnifiedTopology: true });
+const connect = () => new Promise((resolve, reject) => {
+  mongoose.connect(`mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`, { useNewUrlParser: true, useUnifiedTopology: true });
+  resolve();
+});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, `syllabuses connection error: Host: ${MONGO_HOSTNAME} \nPort: ${MONGO_PORT} \n`));
@@ -18,4 +21,7 @@ db.once('open', () => {
 
 const SyllabusModel = mongoose.model('syllabuses', syllabusesSchema);
 
-module.exports = SyllabusModel;
+module.exports = {
+  SyllabusModel,
+  connect,
+};

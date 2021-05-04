@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
-const SyllabusModel = require('./data/syllabusesModel');
+const { SyllabusModel } = require('./data/syllabusesModel');
 
 const hoursToComplete = (courseNumber, cb) => {
   SyllabusModel.findOne({ id: courseNumber })
     .then((syllabusData) => {
-      let hoursToCompleteCourse = syllabusData.toObject().hoursToCompleteCourse;
+      const { hoursToCompleteCourse } = syllabusData.toObject();
       cb({ hoursToCompleteCourse });
     })
     .catch((err) => {
