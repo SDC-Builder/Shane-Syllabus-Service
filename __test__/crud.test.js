@@ -4,7 +4,7 @@ const app = require('../server/app');
 const { SyllabusModel, connect, disconnect } = require('./db.mocks.js');
 const fixtures = require('./fixtures');
 
-beforeAll(async () => {
+beforeAll(() => {
   connect();
 });
 
@@ -12,7 +12,7 @@ afterEach(async () => {
   await SyllabusModel.deleteMany();
 });
 
-afterAll(async () => {
+afterAll(() => {
   disconnect();
 });
 
@@ -38,10 +38,30 @@ describe('Test the root path', () => {
     const sample = fixtures.sampleSyllabus;
     sample.weeks[0].weekNumber = 2;
     sample.weeks[0].hoursToCompleteCourse = 800;
-    const response = await request(app).put('/api/syllabus').send({ body: JSON.stringify(sample) });
+    const response = await request(app).put('/api/syllabus').send(sample);
     expect(response.statusCode).toBe(202);
     records = await SyllabusModel.find();
     expect(records[0].weeks[0].weekNumber).toBe(2);
     expect(records[0].weeks[0].hoursToCompleteCourse).toBe(800);
+  });
+
+  test('It should allow the deleting of a record', async () => {
+    let records = await SyllabusModel.find();
+    expect(records.length).toBe(0);
+    await SyllabusModel.create(fixtures.sampleSyllabus);
+    records = await SyllabusModel.find();
+    expect(records.length).toBe(1);
+    const response = await request(app).delete('/api/syllabus').send({ id: 1 });
+    expect(response.statusCode).toBe(202);
+    records = await SyllabusModel.find();
+    expect(records.length).toBe(0);
+  });
+
+  test('It should responde with a specific record', async () => {
+    await SyllabusModel.create(fixtures.sampleSyllabus);
+    const response = await request(app).get('/api/syllabus/1');
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toBeTruthy();
+    expect(response.body.id).toBe(1);
   });
 });
