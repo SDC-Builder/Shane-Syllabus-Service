@@ -1,6 +1,6 @@
 module.exports = {
   sampleSyllabus: {
-    id: 0,
+    id: 1,
     weeks: [{
       weekNumber: 1,
       lessons: [{
