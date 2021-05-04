@@ -42,7 +42,9 @@ app.post('/api/syllabus', async (req, res) => {
 
 app.put('/api/syllabus', async (req, res) => {
   if (req.body) {
-    await db.rest.update(req.body.id, req.body);
+    console.log('Body:', req.body);
+    const response = await db.rest.update(req.body.id, req.body);
+    console.log(response);
     res.sendStatus(202);
   } else {
     res.sendStatus(400);
