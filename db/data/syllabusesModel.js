@@ -6,12 +6,14 @@ dotenv.config();
 
 const MONGO_HOSTNAME = process.env.MONGO_HOSTNAME || 'localhost';
 const MONGO_PORT = process.env.MONGO_PORT || 27017;
-const MONGO_DB = process.env.MONGO_DB || 'syllabuses';
+const MONGO_DB = process.env.MONGO_DB || 'generators';
 
 const connect = () => new Promise((resolve, reject) => {
   mongoose.connect(`mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`, { useNewUrlParser: true, useUnifiedTopology: true });
   resolve();
 });
+
+const disconnect = () => { mongoose.disconnect(); };
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, `syllabuses connection error: Host: ${MONGO_HOSTNAME} \nPort: ${MONGO_PORT} \n`));
@@ -24,4 +26,5 @@ const SyllabusModel = mongoose.model('syllabuses', syllabusesSchema);
 module.exports = {
   SyllabusModel,
   connect,
+  disconnect,
 };

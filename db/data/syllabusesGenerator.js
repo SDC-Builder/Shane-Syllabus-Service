@@ -45,17 +45,12 @@ const generateSyllabuses = (id) => {
 
       // create lessonTitle
       for (let i = 0; i <= numberOfFakeWords; i++) {
-        lessonTitle = lessonTitle.concat(' ', faker.random.word());
+        lessonTitle += ` ${faker.random.word()}`;
       }
 
       // creates 1 to 3 videos per week
       for (let videoIndex = 0; videoIndex <= numberOfVideos; videoIndex++) {
         let videoTitle = faker.company.catchPhraseAdjective();
-        videoTitle =
-          videoTitle.charAt(0).toUpperCase() +
-          videoTitle
-            .slice(1)
-            .concat(' ', faker.hacker.verb(), ' ', faker.hacker.noun());
 
         const video = {
           videoIndex,
@@ -78,7 +73,7 @@ const generateSyllabuses = (id) => {
         const readingLengthMinutes = Math.ceil(Math.random() * 75);
         let readingTitle = '';
         for (let i = 0; i <= numberOfFakeWords; i++) {
-          readingTitle = readingTitle.concat(faker.random.word(), ' ');
+          readingTitle += `${faker.random.word()} `;
         }
         readingTitle = readingTitle.trimEnd();
         const reading = {
@@ -97,14 +92,7 @@ const generateSyllabuses = (id) => {
         exerciseIndex++
       ) {
         const starterIndex = Math.floor(Math.random() * starters.length);
-        const exerciseTitle = starters[starterIndex].concat(
-          ' ',
-          faker.hacker.verb(),
-          ' ',
-          faker.hacker.adjective(),
-          ' ',
-          faker.hacker.noun(),
-        );
+        const exerciseTitle = `${starters[starterIndex]} ${faker.hacker.verb()} ${faker.hacker.adjective()} ${faker.hacker.noun()}`;
         const exerciseLengthMinutes = Math.ceil(Math.random() * 75);
         const exercise = {
           exerciseIndex,
@@ -167,11 +155,10 @@ const generateSyllabuses = (id) => {
 };
 
 console.time('Start');
-let writeStream = fs.createWriteStream('/output.csv');
-for (let id = 1; id <= 1000; id++) {
+for (let id = 1; id <= 10000; id++) {
   if (id % 1000 === 0) {
     console.log(id);
   }
-  generateSyllabuses(id).pipe(writeStream);
+  syllabuses.push(generateSyllabuses(id));
 }
 console.timeEnd('Start');
