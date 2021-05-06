@@ -19,6 +19,7 @@
     "insert": "node ./db/data/syllabusesInserter.js"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -41,6 +42,7 @@
     "babel-loader": "^8.2.2",
     "coveralls": "^3.1.0",
     "css-loader": "^5.1.2",
+    "csv-write-stream": "^2.0.0",
     "eslint": "^7.21.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
