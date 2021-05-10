@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 const syllabusSchema = new Schema({
@@ -13,24 +14,24 @@ const syllabusSchema = new Schema({
         videoIndex: Number,
         videoTitle: String,
         videoLengthMinutes: Number,
-        videoLengthSeconds: Number
+        videoLengthSeconds: Number,
       }],
       videosLength: Number,
       readings: [{
         readingIndex: Number,
         readingTitle: String,
-        readingLengthMinutes: Number
+        readingLengthMinutes: Number,
       }],
       readingsLength: Number,
       exercises: [{
         exerciseIndex: Number,
         exerciseTitle: String,
-        exerciseLengthMinutes: Number
+        exerciseLengthMinutes: Number,
       }],
-      exercisesLength: Number
+      exercisesLength: Number,
     }],
-    hoursToCompleteCourse: Number
-  }]
+    hoursToCompleteCourse: Number,
+  }],
 });
 
 module.exports = syllabusSchema;
