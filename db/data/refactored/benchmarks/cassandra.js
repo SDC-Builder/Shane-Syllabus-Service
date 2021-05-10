@@ -7,6 +7,7 @@ const client = new cassandra.Client({
 });
 
 (async () => {
+  await client.connect();
   console.time('All Queries');
   console.time('Test One');
   let query = 'SELECT * FROM syllabus WHERE id=9999999';
