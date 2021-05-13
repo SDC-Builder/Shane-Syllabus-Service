@@ -9,23 +9,26 @@ const connect = () => new Promise((resolve, reject) => {
 });
 
 const disconnect = () => new Promise((resolve, reject) => {
-  client.disconnect()
+  client.end()
     .then(() => resolve('Disconnected!'))
     .catch((err) => reject(err));
 });
 
-const insert = (id, record) => {
-  const queryStatement = `INSERT INTO syllabus (id, record) values (${id}, ${JSON.stringify(record)})`;
-  console.log(queryStatement)
-  let query = client.query(queryStatement)
-    .then(result => console.log(result));
-  // const queryResult = query.on('row', (row, result) => {
-  //   result.add(row);
-  //   return result;
-  // });
-  // console.log(query);
+const insert = (records) => new Promise((resolve, reject) => {
+  const queryStatement = `INSERT INTO syllabus (id, syllabus) values ${records}`;
+  client.query(queryStatement)
+    .then((done) => resolve(done))
+    .catch((err) => reject(err));
+});
+
+const getCount = () => {
+  client.query('SELECT COUNT(*) FROM syllabus;')
+    .then((response) => console.log(`${response.rows[0].count} rows`));
 };
 
-connect()
-  .then((message) => console.log(message))
-  .then(() => insert(1, { test: 'test' }));
+module.exports = {
+  connect,
+  disconnect,
+  insert,
+  getCount,
+};
