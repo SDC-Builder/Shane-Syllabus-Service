@@ -39,10 +39,10 @@ const getRandomWeeks = (number) => {
   return weeks;
 };
 
-const generate = (id) => (JSON.stringify({
+const generate = (id) => ({
   id,
   weeks: getRandomWeeks(randomNumber(3)),
-}));
+});
 
 // (async () => {
 //   console.time('Start');
