@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const request = require('supertest');
 const app = require('../server/app');
-const { SyllabusModel, connect, disconnect } = require('./db.mocks.js');
+const { methods, connect, disconnect } = require('./postgres.db.mocks.js');
 const fixtures = require('./fixtures');
 
 beforeAll(() => {
@@ -9,7 +9,7 @@ beforeAll(() => {
 });
 
 afterEach(async () => {
-  await SyllabusModel.deleteMany();
+  await methods.deleteAll();
 });
 
 afterAll(() => {
@@ -17,7 +17,7 @@ afterAll(() => {
 });
 
 describe('Test the root path', () => {
-  test('It should respond to the GET method', async () => {
+  test.only('It should respond to the GET method', async () => {
     const response = await request(app).get('/');
     expect(response.statusCode).toBe(200);
   });

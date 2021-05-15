@@ -26,8 +26,12 @@ app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
 
 app.get('/api/syllabus/:courseNumber', (req, res) => {
   // console.log('GET /api/syllabus courseNumber: ', courseNumber);
-  db.rest.get(req.params.courseNumber, (responseData) => {
-    res.send(responseData);
+  db.rest.get(req.params.courseNumber, (err, responseData) => {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.send(responseData);
+    }
   });
 });
 
@@ -67,4 +71,3 @@ app.get('/api/svgs', (req, res) => {
 });
 
 module.exports = app;
-

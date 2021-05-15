@@ -1,4 +1,5 @@
-const { SyllabusModel } = require('./data/syllabusesModel');
+// const { SyllabusModel } = require('./data/syllabusesModel');
+const Postgres = require('./postgres/database');
 
 // const hoursToComplete = (courseNumber, cb) => {
 //   SyllabusModel.findOne({ id: courseNumber })
@@ -27,29 +28,35 @@ const { SyllabusModel } = require('./data/syllabusesModel');
 // };
 
 const rest = {
-  get: (courseNumber, cb) => {
-    const options = { id: courseNumber };
-    SyllabusModel.findOne(options)
-      .then((syllabusData) => {
-        cb(syllabusData);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  // get: (courseNumber, cb) => {
+  //   const options = { id: courseNumber };
+  //   SyllabusModel.findOne(options)
+  //     .then((syllabusData) => {
+  //       cb(syllabusData);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // },
+
+  get: async (courseNumber, cb) => {
+    const result = await Postgres.get(courseNumber)
+      .catch((err) => cb(err));
+    cb(null, result);
   },
 
   post: async (courseInformation) => {
-    const response = await SyllabusModel.create(courseInformation);
+    const response = await Postgres.post(courseInformation);
     return response;
   },
 
   update: async (id, newInformation) => {
-    const response = await SyllabusModel.findOneAndUpdate({ id }, { ...newInformation });
+    const response = await Postgres.update(id, { ...newInformation });
     return response;
   },
 
   delete: async (id) => {
-    const response = await SyllabusModel.deleteOne({ id });
+    const response = await Postgres.delete(id);
     return response;
   },
 };

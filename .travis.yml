@@ -1,8 +1,14 @@
 language: node_js
 node_js:
 - node
-services: mongodb
+services: postgres
 script:
   - npm test -- --coverage
+env:
+  global:
+    - FILE="__test__/postgres.mock.sql"
+    - TEST_DB_FILE=`pwd`/$FILE
+before_script:
+  - psql -c "$TEST" -U postgres
 after_script:
   - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
