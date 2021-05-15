@@ -7,7 +7,7 @@ script:
 env:
   global:
     - FILE="__test__/postgres.mock.sql"
-    - TEST_DB_FILE=`pwd`/$FILE
+    - TEST_DB_FILE="`pwd`/$FILE"
 before_script:
   - psql -c "$TEST" -U postgres
 after_script:
