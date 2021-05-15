@@ -17,17 +17,19 @@ afterAll(() => {
 });
 
 describe('Test the root path', () => {
-  test.only('It should respond to the GET method', async () => {
+  test('It should respond to the GET method', async () => {
     const response = await request(app).get('/');
     expect(response.statusCode).toBe(200);
   });
 
   test('It should allow the insertion of a document', async () => {
-    let records = await SyllabusModel.find();
-    expect(records.length).toBe(0);
+    await expect(async () => {
+      const result = await methods.get(0);
+      console.log(result);
+    }).toThrow('Record not found.');
     const response = await request(app).post('/api/syllabus', { body: fixtures.sampleSyllabusString });
     expect(response.statusCode).toBe(201);
-    records = await SyllabusModel.find();
+    records = await methods.get(0);
     expect(records.length).toBe(1);
   });
 
