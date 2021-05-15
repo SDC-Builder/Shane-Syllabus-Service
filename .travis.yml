@@ -10,7 +10,6 @@ env:
     - TEST_DB_FILE="`pwd`/$FILE"
 before_script:
   - echo $TEST_DB_FILE
-  - $TEST_DB_FILE
   - echo "$TEST_DB_FILE"
   - psql -f "$TEST_DB_FILE"
 after_script:
