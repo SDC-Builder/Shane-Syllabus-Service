@@ -1,12 +1,10 @@
 /* eslint-disable no-undef */
-const { generate, getRandomWeeks, randomNumber } = require('../db/data/refactored/generatorNew');
+const { generate } = require('../db/data/refactored/generatorNew');
 
-let data;
 let parsed;
 
 beforeAll(() => {
   parsed = generate(1);
-  // parsed = JSON.parse(data);
 });
 
 describe('Generating Data', () => {

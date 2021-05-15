@@ -8,7 +8,7 @@ const client = new pg.Client('postgres://localhost/syllabus_data');
   console.time('Test One');
   let query = 'SELECT syllabus FROM syllabus WHERE id=9000000';
   client.query(query)
-    .then((result) => {
+    .then(() => {
       // console.log(result.rows[0].syllabus.weeks);
       console.timeEnd('Test One');
     })
@@ -17,7 +17,7 @@ const client = new pg.Client('postgres://localhost/syllabus_data');
   console.time('Test Two');
   query = 'SELECT syllabus FROM syllabus WHERE id=9999999';
   client.query(query)
-    .then((result) => {
+    .then(() => {
       console.timeEnd('Test Two');
     })
     .catch((err) => console.error(err));
@@ -25,7 +25,7 @@ const client = new pg.Client('postgres://localhost/syllabus_data');
   console.time('Test Three');
   query = 'SELECT syllabus FROM syllabus WHERE id=7777777';
   client.query(query)
-    .then((result) => {
+    .then(() => {
       console.timeEnd('Test Three');
       console.timeEnd('All Queries');
       client.end();
