@@ -5,13 +5,13 @@ let data;
 let parsed;
 
 beforeAll(() => {
-  data = generate(1);
-  parsed = JSON.parse(data);
+  parsed = generate(1);
+  // parsed = JSON.parse(data);
 });
 
 describe('Generating Data', () => {
-  test('It should output a valid stringified object', () => {
-    expect(typeof data).toBe('string');
+  test('It should output a valid object', () => {
+    // expect(typeof data).toBe('object');
     expect(typeof parsed).toBe('object');
     expect(Array.isArray(parsed)).toBeFalsy();
   });
