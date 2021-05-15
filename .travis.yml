@@ -9,6 +9,6 @@ env:
     - FILE="__test__/postgres.mock.sql"
     - TEST_DB_FILE="`pwd`/$FILE"
 before_script:
-  - psql -c "$TEST" -U postgres
+  - psql -f "$TEST" -U postgres
 after_script:
   - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
