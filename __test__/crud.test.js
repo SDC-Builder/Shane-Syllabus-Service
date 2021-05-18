@@ -23,26 +23,35 @@ describe('Test the root path', () => {
   });
 
   test('It should allow the insertion of a document', async () => {
-    await expect(async () => {
-      const result = await methods.get(0);
-      console.log(result);
-    }).toThrow('Record not found.');
+    try {
+      await methods.get(0);
+    } catch (e) {
+      expect(e.message).toMatch('Record not found.');
+    }
     const response = await request(app).post('/api/syllabus', { body: fixtures.sampleSyllabusString });
     expect(response.statusCode).toBe(201);
-    records = await methods.get(0);
+    const records = await methods.get(0);
     expect(records.length).toBe(1);
   });
 
-  test('It should allow modifiction of a document', async () => {
-    let records = await SyllabusModel.find();
-    expect(records.length).toBe(0);
-    await SyllabusModel.create(fixtures.sampleSyllabus);
+  test.only('It should allow modifiction of a document', async () => {
+    try {
+      await methods.get(1);
+    } catch (e) {
+      expect(e.message).toMatch('Record not found.');
+    }
+    await methods.post(fixtures.sampleSyllabus);
     const sample = fixtures.sampleSyllabus;
     sample.weeks[0].weekNumber = 2;
     sample.weeks[0].hoursToCompleteCourse = 800;
-    const response = await request(app).put('/api/syllabus').send(sample);
+    try {
+      await request(app).put('/api/syllabus').send(sample);
+    } catch (err) {
+      console.log('Error--------->', err);
+    }
+    console.log('<---------marker---------->');
     expect(response.statusCode).toBe(202);
-    records = await SyllabusModel.find();
+    const records = await methods.get(0);
     expect(records[0].weeks[0].weekNumber).toBe(2);
     expect(records[0].weeks[0].hoursToCompleteCourse).toBe(800);
   });

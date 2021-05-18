@@ -34,8 +34,13 @@ module.exports = {
     console.log(id, newRecord);
     const query = `UPDATE syllabus SET syllabus='${JSON.stringify(newRecord)}' WHERE id=${id};`;
     client.query(query)
-      .then((result) => resolve(result))
-      .catch((err) => reject(err));
+      .then((result) => {
+        resolve(result);
+      })
+      .catch((err) => {
+        console.log('Result........', err);
+        reject(err);
+      });
   })),
   delete: (id) => (new Promise((resolve, reject) => {
     const query = `DELETE FROM syllabus WHERE id=${id};`;
