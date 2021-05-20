@@ -36,7 +36,7 @@ app.get('/api/syllabus/:courseNumber', (req, res) => {
 });
 
 app.post('/api/syllabus', async (req, res) => {
-  if (req.body) {
+  if (Object.entries(req.body).length > 0) {
     await db.rest.post(req.body);
     res.sendStatus(201);
   } else {
@@ -45,7 +45,7 @@ app.post('/api/syllabus', async (req, res) => {
 });
 
 app.put('/api/syllabus', async (req, res) => {
-  if (req.body) {
+  if (Object.entries(req.body).length > 0) {
     await db.rest.update(req.body.id, req.body);
     res.sendStatus(202);
   } else {
@@ -54,7 +54,7 @@ app.put('/api/syllabus', async (req, res) => {
 });
 
 app.delete('/api/syllabus', async (req, res) => {
-  if (req.body) {
+  if (Object.entries(req.body).length > 0) {
     await db.rest.delete(req.body.id);
     res.sendStatus(202);
   } else {

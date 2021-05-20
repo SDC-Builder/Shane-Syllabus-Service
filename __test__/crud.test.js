@@ -1,15 +1,20 @@
 /* eslint-disable no-undef */
 const request = require('supertest');
-const app = require('../server/app');
-const { methods, connect, disconnect } = require('./postgres.db.mocks.js');
+const express = require('../server/app');
+// const { connect, disconnect } = require('./postgres.db.mocks.js');
+const {
+  connect, disconnect, get, post, update, deleteOne, deleteAll,
+} = require('../db/postgres/database');
 const fixtures = require('./fixtures');
 
-beforeAll(() => {
-  connect();
+const app = request(express);
+
+beforeAll(async () => {
+  await connect();
 });
 
 afterEach(async () => {
-  await methods.deleteAll();
+  await deleteAll();
 });
 
 afterAll(() => {
@@ -18,29 +23,35 @@ afterAll(() => {
 
 describe('Test the root path', () => {
   test('It should respond to the GET method', async () => {
-    const response = await request(app).get('/');
-    expect(response.statusCode).toBe(200);
+    expect.assertions(1);
+    await app.get('/')
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+      });
   });
 
   test('It should allow the insertion of a document', async () => {
-    try {
-      await methods.get(0);
-    } catch (e) {
-      expect(e.message).toMatch('Record not found.');
-    }
-    const response = await request(app).post('/api/syllabus', { body: fixtures.sampleSyllabusString });
-    expect(response.statusCode).toBe(201);
-    const records = await methods.get(0);
-    expect(records.length).toBe(1);
+    expect.assertions(3);
+    await get(0)
+      .catch((err) => expect(err.message).toBe('Record not found.'));
+
+    const body = fixtures.sampleSyllabus;
+    await request(express).post('/api/syllabus')
+      .send({ ...body })
+      .then((response) => expect(response.statusCode).toBe(201))
+      .then(() => get(0))
+      .then((records) => {
+        expect(records).toBeTruthy();
+      });
   });
 
-  test.only('It should allow modifiction of a document', async () => {
+  test('It should allow modifiction of a document', async () => {
     try {
-      await methods.get(1);
+      await get(1);
     } catch (e) {
       expect(e.message).toMatch('Record not found.');
     }
-    await methods.post(fixtures.sampleSyllabus);
+    await post(fixtures.sampleSyllabus);
     const sample = fixtures.sampleSyllabus;
     sample.weeks[0].weekNumber = 2;
     sample.weeks[0].hoursToCompleteCourse = 800;
@@ -51,7 +62,7 @@ describe('Test the root path', () => {
     }
     console.log('<---------marker---------->');
     expect(response.statusCode).toBe(202);
-    const records = await methods.get(0);
+    const records = await get(0);
     expect(records[0].weeks[0].weekNumber).toBe(2);
     expect(records[0].weeks[0].hoursToCompleteCourse).toBe(800);
   });

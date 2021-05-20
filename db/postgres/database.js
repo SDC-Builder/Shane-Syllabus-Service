@@ -1,6 +1,12 @@
 const pg = require('pg');
 
-const client = new pg.Client('postgres://localhost/syllabus_data');
+let client;
+
+if (process.env.NODE_ENV === 'test') {
+  client = new pg.Client('postgres://localhost/jest');
+} else {
+  client = new pg.Client('postgres://localhost/syllabus_data');
+}
 
 module.exports = {
   connect: () => (new Promise((resolve, reject) => {
@@ -42,10 +48,15 @@ module.exports = {
         reject(err);
       });
   })),
-  delete: (id) => (new Promise((resolve, reject) => {
+  deleteOne: (id) => (new Promise((resolve, reject) => {
     const query = `DELETE FROM syllabus WHERE id=${id};`;
     client.query(query)
       .then((response) => resolve(response))
+      .catch((err) => reject(err));
+  })),
+  deleteAll: () => (new Promise((resolve, reject) => {
+    client.query('TRUNCATE syllabus;')
+      .then(() => resolve())
       .catch((err) => reject(err));
   })),
 };

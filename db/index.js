@@ -56,7 +56,7 @@ const rest = {
   },
 
   delete: async (id) => {
-    const response = await Postgres.delete(id);
+    const response = await Postgres.deleteOne(id);
     return response;
   },
 };
