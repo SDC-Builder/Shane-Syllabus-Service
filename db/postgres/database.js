@@ -37,7 +37,6 @@ module.exports = {
       .catch((err) => reject(err));
   })),
   update: (id, newRecord) => (new Promise((resolve, reject) => {
-    console.log(id, newRecord);
     const query = `UPDATE syllabus SET syllabus='${JSON.stringify(newRecord)}' WHERE id=${id};`;
     client.query(query)
       .then((result) => {
