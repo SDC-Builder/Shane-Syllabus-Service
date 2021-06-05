@@ -26,3 +26,6 @@ dist/
 
 # Database Information
 generated.csv
+
+# Environment files
+.env
