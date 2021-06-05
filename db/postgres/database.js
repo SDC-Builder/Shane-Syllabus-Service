@@ -1,12 +1,14 @@
 // const pg = require('pg');
 const { Pool } = require('pg');
 const pg = require('pg');
+const dotenv = require('dotenv');
 
 let client;
 
 if (process.env.NODE_ENV === 'test') {
   client = new pg.Client('postgres://localhost/jest');
 } else {
+  dotenv.config();
   client = new Pool({
     user: 'postgres',
     host: '127.0.0.1',
