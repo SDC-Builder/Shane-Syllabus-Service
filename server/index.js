@@ -1,6 +1,7 @@
 const app = require('./app');
 // const { connect } = require('../db/data/syllabusesModel');
 const { connect } = require('../db/postgres/database');
+require('newrelic');
 
 const port = 3005;
 

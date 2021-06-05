@@ -1,3 +1,5 @@
+// const pg = require('pg');
+const { Pool } = require('pg');
 const pg = require('pg');
 
 let client;
@@ -5,13 +7,23 @@ let client;
 if (process.env.NODE_ENV === 'test') {
   client = new pg.Client('postgres://localhost/jest');
 } else {
-  client = new pg.Client('postgres://localhost/syllabus_data');
+  client = new Pool({
+    user: 'postgres',
+    host: '127.0.0.1',
+    database: 'syllabus_data',
+    port: 5432,
+    password: 'Timmy',
+    // 'postgres://localhost/syllabus_data'
+  });
 }
 
 module.exports = {
   connect: () => (new Promise((resolve, reject) => {
     client.connect()
-      .then(() => resolve())
+      .then(() => {
+        console.log('Connected!');
+        resolve();
+      })
       .catch((err) => reject(err));
   })),
   disconnect: () => (new Promise((resolve, reject) => {

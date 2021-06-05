@@ -2,18 +2,39 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
+const compression = require('compression');
+const helmet = require('helmet');
+// const cluster = require('cluster');
+// const totalCPUs = require('os').cpus().length;
 const db = require('../db/index.js');
 const svgs = require('./svgs');
 
-const app = express();
+// if (cluster.isMaster) {
+//   console.log(`Number of CPUs is ${totalCPUs}`);
+//   console.log(`Master ${process.pid} is running`);
 
+//   // Fork workers
+//   for (let i = 0; i < totalCPUs; i += 1) {
+//     cluster.fork();
+//   }
+
+//   cluster.on('exit', (worker) => {
+//     console.log(`worker ${worker.process.pid} died`);
+//     console.log("Let's fork another worker!");
+//     cluster.fork();
+//   });
+// } else {
+const app = express();
+// console.log(`Worker ${process.pid} started`);
+
+app.use(compression());
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('./public'));
 app.use(cors());
 
 app.get('/:courseNumber', (req, res) => {
-  // console.log('GET / courseNumber: ', courseNumber);
   res.sendFile(path.resolve('./public/index.html'));
 });
 
@@ -25,7 +46,6 @@ app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
 });
 
 app.get('/api/syllabus/:courseNumber', (req, res) => {
-  // console.log('GET /api/syllabus courseNumber: ', courseNumber);
   db.rest.get(req.params.courseNumber, (err, responseData) => {
     if (err) {
       res.sendStatus(404);
@@ -71,3 +91,4 @@ app.get('/api/svgs', (req, res) => {
 });
 
 module.exports = app;
+// }
