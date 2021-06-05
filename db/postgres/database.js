@@ -10,9 +10,9 @@ if (process.env.NODE_ENV === 'test') {
   client = new Pool({
     user: 'postgres',
     host: '127.0.0.1',
-    database: 'syllabus_data',
+    database: process.env.DB_NAME,
     port: 5432,
-    password: 'Timmy',
+    password: process.env.DB_PASS,
     // 'postgres://localhost/syllabus_data'
   });
 }
