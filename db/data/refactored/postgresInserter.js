@@ -1,6 +1,14 @@
-const pg = require('pg');
+const { Pool } = require('pg');
+const dotenv = require('dotenv');
 
-const client = new pg.Client('postgres://localhost/syllabus_data');
+dotenv.config();
+const client = new Pool({
+  user: 'postgres',
+  host: '127.0.0.1',
+  database: process.env.DB_NAME,
+  port: 5432,
+  password: process.env.DB_PASS,
+});
 
 const connect = () => new Promise((resolve, reject) => {
   client.connect()

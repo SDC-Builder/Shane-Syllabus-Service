@@ -2,8 +2,13 @@
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 const { generate } = require('./generatorNew');
-const { insert, connect, disconnect, getCount } = require('./postgresInserter');
+const {
+  insert, connect,
+} = require('./postgresInserter');
+
 const numRecords = 100000;
+
+require('dotenv').config();
 
 const writer = csvWriter({ sendHeaders: false });
 writer.pipe(fs.createWriteStream('./test.txt'));
@@ -12,7 +17,7 @@ const batchInsert = async (batchNumber) => {
   console.log(`Batch ${batchNumber}`);
   console.log(`Inserting rows ${((numRecords * batchNumber) + 1)} to ${(numRecords * (batchNumber + 1))}`);
   console.time('end');
-  allRecords = '';
+  let allRecords = '';
   for (let id = ((numRecords * batchNumber) + 1); id <= (numRecords * (batchNumber + 1)); id++) {
     if (id % 100000 === 0) {
       console.log('ID', id);
@@ -39,6 +44,7 @@ connect()
   .then(async () => {
     console.time('All Records Inserted in');
     for (let i = 0; i < 100; i++) {
+      // eslint-disable-next-line no-await-in-loop
       await batchInsert(i);
     }
     console.time('All Records Inserted in');
