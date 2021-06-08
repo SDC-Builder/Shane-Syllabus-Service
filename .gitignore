@@ -29,3 +29,4 @@ generated.csv
 
 # Environment files
 .env
+newrelic.js
