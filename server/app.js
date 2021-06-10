@@ -39,7 +39,7 @@ app.get('/bundle.js', (req, res) => {
 });
 
 app.get('/:courseNumber', (req, res) => {
-  res.sendFile(path.resolve('./public/index.html'));
+  res.sendFile(path.resolve(__dirname, '/public/index.html'));
 });
 
 app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
