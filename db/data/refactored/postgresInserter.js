@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const client = new Pool({
   user: 'postgres',
-  host: '127.0.0.1',
+  host: '3.130.134.87',
   database: process.env.DB_NAME,
   port: 5432,
   password: process.env.DB_PASS,
@@ -24,6 +24,7 @@ const disconnect = () => new Promise((resolve, reject) => {
 
 const insert = (records) => new Promise((resolve, reject) => {
   const queryStatement = `INSERT INTO syllabus (id, syllabus) values ${records}`;
+  console.log('Sending to db');
   client.query(queryStatement)
     .then((done) => resolve(done))
     .catch((err) => reject(err));

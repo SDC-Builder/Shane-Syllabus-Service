@@ -6,7 +6,7 @@ const {
   insert, connect,
 } = require('./postgresInserter');
 
-const numRecords = 100000;
+const numRecords = 10000;
 
 require('dotenv').config();
 
@@ -43,7 +43,7 @@ const batchInsert = async (batchNumber) => {
 connect()
   .then(async () => {
     console.time('All Records Inserted in');
-    for (let i = 0; i < 100; i++) {
+    for (let i = 934; i < 1000; i++) {
       // eslint-disable-next-line no-await-in-loop
       await batchInsert(i);
     }
