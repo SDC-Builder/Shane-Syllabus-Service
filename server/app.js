@@ -35,8 +35,7 @@ app.use(express.static('./public'));
 app.use(cors());
 
 app.get('/bundle.js', (req, res) => {
-  console.log('Bundle.js route');
-  res.sendFile(path.resolve('./public/bundle.js'));
+  res.sendFile(path.resolve(__dirname, '/public/bundle.js'));
 });
 
 app.get('/:courseNumber', (req, res) => {
