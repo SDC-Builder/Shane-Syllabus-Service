@@ -5,7 +5,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'client', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -14,20 +14,20 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env', '@babel/preset-react']
-        }
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+        },
       },
       {
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader'
-        ]
-      }
-    ]
+          'css-loader',
+        ],
+      },
+    ],
   },
   watchOptions: {
     poll: true,
-    ignored: /node_modules/
-  }
+    ignored: /node_modules/,
+  },
 };
