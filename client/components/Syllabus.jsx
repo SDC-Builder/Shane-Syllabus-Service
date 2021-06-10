@@ -8,11 +8,11 @@ class Syllabus extends React.Component {
     super(props);
     this.state = state;
 
-    //aborts get if component is unmounted
+    // aborts get if component is unmounted
     this.controller = new AbortController();
   }
 
-  fetches () {
+  fetches() {
     const {
       servicesURL,
       syllabusPort,
@@ -23,23 +23,23 @@ class Syllabus extends React.Component {
     } = this.state;
 
     const options = { signal: this.controller.signal };
-    fetch(`http://${servicesURL}:${syllabusPort}/api/syllabus/${courseNumber}`, options)
-      .then(responseData => responseData.json())
+    fetch(`http://${servicesURL}/api/syllabus/${courseNumber}`, options)
+      .then((responseData) => responseData.json())
       .then((responseJSON) => { this.setState({ syllabusData: responseJSON }); })
       .catch((err) => { if (err) { console.error('Error in GET syllabus', err); } });
 
     fetch(`http://${servicesURL}:${imagesPort}/api/svgs`, options)
-      .then(responseData => responseData.json())
-      .then(responseJSON => this.setState({ svgsData: responseJSON }))
+      .then((responseData) => responseData.json())
+      .then((responseJSON) => this.setState({ svgsData: responseJSON }))
       .catch((err) => { if (err) { console.error('Error in GET svgs', err); } });
 
     fetch(`http://${reviewsURL}:${reviewsPort}/api/totalReviewScore/${courseNumber}`, options)
-      .then(responseData => responseData.json())
+      .then((responseData) => responseData.json())
       .then((responseJSON) => {
         const fiveStar = parseInt(responseJSON.fiveStarPercent.split('%')[0]);
         const fourStar = parseInt(responseJSON.fourStarPercent.split('%')[0]);
         const positiveReviews = (fiveStar + fourStar).toString().concat('%');
-        const reviewCount = responseJSON.reviewCount;
+        const { reviewCount } = responseJSON;
         this.setState({ positiveReviews, reviewCount });
       })
       .catch((err) => { if (err) { console.error('Error in GET starReviews', err); } });
@@ -51,7 +51,7 @@ class Syllabus extends React.Component {
     this.setState({ courseNumber }, () => { this.fetches(); });
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.controller.abort();
   }
 
@@ -60,7 +60,7 @@ class Syllabus extends React.Component {
       svgsData,
       positiveReviews,
       reviewCount,
-      syllabusData
+      syllabusData,
     } = this.state;
 
     return (
