@@ -34,6 +34,10 @@ app.use(bodyParser.json());
 app.use(express.static('./public'));
 app.use(cors());
 
+app.get('/bundle.js', (req, res) => {
+  res.sendFile(path.resolve('./public/bundle.js'));
+});
+
 app.get('/:courseNumber', (req, res) => {
   res.sendFile(path.resolve('./public/index.html'));
 });
