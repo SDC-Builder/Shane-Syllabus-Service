@@ -31,7 +31,7 @@ app.use(compression());
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static('./public'));
+app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(cors());
 
 app.get('/bundle.js', (req, res) => {
