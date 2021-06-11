@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const cors = require('cors');
+// const cors = require('cors');
 const compression = require('compression');
 const helmet = require('helmet');
 // const cluster = require('cluster');
@@ -31,8 +31,8 @@ app.use(compression());
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.resolve(__dirname, './public')));
-app.use(cors());
+app.use(express.static(path.resolve(__dirname, '../public')));
+// app.use(cors());
 
 app.get('/bundle.js', (req, res) => {
   res.sendFile(path.resolve(__dirname, '/public/bundle.js'));
