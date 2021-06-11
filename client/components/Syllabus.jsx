@@ -28,12 +28,12 @@ class Syllabus extends React.Component {
       .then((responseJSON) => { this.setState({ syllabusData: responseJSON }); })
       .catch((err) => { if (err) { console.error('Error in GET syllabus', err); } });
 
-    fetch(`http://${servicesURL}:${imagesPort}/api/svgs`, options)
+    fetch(`http://${servicesURL}/api/svgs`, options)
       .then((responseData) => responseData.json())
       .then((responseJSON) => this.setState({ svgsData: responseJSON }))
       .catch((err) => { if (err) { console.error('Error in GET svgs', err); } });
 
-    fetch(`http://${reviewsURL}:${reviewsPort}/api/totalReviewScore/${courseNumber}`, options)
+    fetch(`http://${reviewsURL}/api/totalReviewScore/${courseNumber}`, options)
       .then((responseData) => responseData.json())
       .then((responseJSON) => {
         const fiveStar = parseInt(responseJSON.fiveStarPercent.split('%')[0]);
