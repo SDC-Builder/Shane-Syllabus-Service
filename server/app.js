@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const compression = require('compression');
-// const helmet = require('helmet');
+const helmet = require('helmet');
 // const cluster = require('cluster');
 // const totalCPUs = require('os').cpus().length;
 const db = require('../db/index.js');
@@ -28,7 +28,7 @@ const app = express();
 // console.log(`Worker ${process.pid} started`);
 
 app.use(compression());
-// app.use(helmet());
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, '../public')));
