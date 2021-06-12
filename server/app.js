@@ -31,6 +31,7 @@ app.use(compression());
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+console.log(path.resolve(__dirname, '../public'));
 app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(cors());
 
