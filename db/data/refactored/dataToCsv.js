@@ -6,12 +6,12 @@ const {
   insert, connect,
 } = require('./postgresInserter');
 
-const numRecords = 2000;
+const numRecords = 1000;
 
 require('dotenv').config();
 
 const writer = csvWriter({ sendHeaders: false });
-writer.pipe(fs.createWriteStream('./public/test.txt'));
+writer.pipe(fs.createWriteStream('./public/test.json'));
 
 const batchInsert = async (batchNumber) => {
   console.log(`Batch ${batchNumber}`);
@@ -28,7 +28,14 @@ const batchInsert = async (batchNumber) => {
     } else {
       allRecords += `(${id}, '${JSON.stringify(record)}'),`;
     }
-    writer.write({ syllabus: `${JSON.stringify(record)}` });
+    // writer.write({ syllabus: `${JSON.stringify(record, null, 4)}` });
+    fs.appendFile('./public/test.json', `${JSON.stringify(record, null, 4)},\n`, 'utf8', (err) => {
+      if (err) {
+        console.log('Error writing files', err);
+      } else {
+        console.log('Done!');
+      }
+    });
     try {
       // eslint-disable-next-line no-await-in-loop
       await new Promise((resolve) => setImmediate(resolve));
@@ -42,7 +49,7 @@ const batchInsert = async (batchNumber) => {
 
 (async () => {
   console.time('All Records Inserted in');
-  for (let i = 1000; i < 1001; i++) {
+  for (let i = 1000; i < 1002; i++) {
     // eslint-disable-next-line no-await-in-loop
     await batchInsert(i);
   }
