@@ -28,7 +28,7 @@ const batchInsert = async (batchNumber) => {
     } else {
       allRecords += `(${id}, '${JSON.stringify(record)}'),`;
     }
-    // writer.write({ syllabus: `${record}\n` });
+    writer.write({ syllabus: `${JSON.stringify(record)}` });
     try {
       // eslint-disable-next-line no-await-in-loop
       await new Promise((resolve) => setImmediate(resolve));
@@ -36,16 +36,15 @@ const batchInsert = async (batchNumber) => {
       console.log(err);
     }
   }
-  await insert(allRecords);
+  // await insert(allRecords);
   console.timeEnd('end');
 };
 
-connect()
-  .then(async () => {
-    console.time('All Records Inserted in');
-    for (let i = 934; i < 1000; i++) {
-      // eslint-disable-next-line no-await-in-loop
-      await batchInsert(i);
-    }
-    console.time('All Records Inserted in');
-  });
+(async () => {
+  console.time('All Records Inserted in');
+  for (let i = 1000; i < 1001; i++) {
+    // eslint-disable-next-line no-await-in-loop
+    await batchInsert(i);
+  }
+  console.time('All Records Inserted in');
+})();
