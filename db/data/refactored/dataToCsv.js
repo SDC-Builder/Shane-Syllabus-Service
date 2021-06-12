@@ -29,7 +29,7 @@ const batchInsert = async (batchNumber) => {
       allRecords += `(${id}, '${JSON.stringify(record)}'),`;
     }
     // writer.write({ syllabus: `${JSON.stringify(record, null, 4)}` });
-    fs.appendFile('./public/test.json', `${JSON.stringify(record, null, 4)},\n`, 'utf8', (err) => {
+    fs.appendFile('./public/test.json', `${JSON.stringify(record, null, 4)}\n`, 'utf8', (err) => {
       if (err) {
         console.log('Error writing files', err);
       } else {
