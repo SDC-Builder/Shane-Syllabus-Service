@@ -6,12 +6,12 @@ const {
   insert, connect,
 } = require('./postgresInserter');
 
-const numRecords = 10000;
+const numRecords = 2000;
 
 require('dotenv').config();
 
 const writer = csvWriter({ sendHeaders: false });
-writer.pipe(fs.createWriteStream('./test.txt'));
+writer.pipe(fs.createWriteStream('./public/test.txt'));
 
 const batchInsert = async (batchNumber) => {
   console.log(`Batch ${batchNumber}`);
