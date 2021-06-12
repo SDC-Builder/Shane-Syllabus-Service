@@ -9,6 +9,7 @@ connect()
   .then(() => {
     app.listen(port, () => {
       console.log('Node Env:', process.env.NODE_ENV);
+      console.log(__dirname);
       console.log(`Syllabus service listening at http://localhost:${port}`);
     });
   });
