@@ -8,6 +8,7 @@ const port = 3005;
 connect()
   .then(() => {
     app.listen(port, () => {
+      console.log('Node Env:', process.env.NODE_ENV);
       console.log(`Syllabus service listening at http://localhost:${port}`);
     });
   });
