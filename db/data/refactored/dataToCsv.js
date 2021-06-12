@@ -49,7 +49,7 @@ const batchInsert = async (batchNumber) => {
 
 (async () => {
   console.time('All Records Inserted in');
-  for (let i = 1000; i < 1002; i++) {
+  for (let i = 1000; i < 1001; i++) {
     // eslint-disable-next-line no-await-in-loop
     await batchInsert(i);
   }
