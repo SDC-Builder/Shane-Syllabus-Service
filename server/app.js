@@ -35,11 +35,11 @@ app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(cors());
 
 app.get('/bundle.js', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '/public/bundle.js'));
+  res.sendFile(path.resolve(__dirname, '../public/bundle.js'));
 });
 
 app.get('/:courseNumber', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '/public/index.html'));
+  res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
 app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
