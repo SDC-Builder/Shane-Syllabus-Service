@@ -11,8 +11,8 @@ if (process.env.NODE_ENV === 'test') {
   dotenv.config();
   client = new Pool({
     user: 'postgres',
-    // host: '172.31.23.110',
-    host: '127.0.0.1',
+    host: '172.31.23.110',
+    // host: '127.0.0.1',
     database: process.env.DB_NAME,
     port: 5432,
     password: process.env.DB_PASS,
