@@ -69,7 +69,7 @@ module.exports = {
   positiveReviews: '3.14%',
   reviewCount: 420,
   syllabusPort: '3005',
-  servicesURL: '3.16.120.223',
+  servicesURL: '18.191.233.84',
   // servicesURL: 'localhost',
   imagesPort: 3005,
   // reviewsURL: '3.139.47.159',
