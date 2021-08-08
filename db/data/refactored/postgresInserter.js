@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const client = new Pool({
   user: 'postgres',
-  host: '3.130.134.87',
+  host: '127.0.0.1',
   database: process.env.DB_NAME,
   port: 5432,
   password: process.env.DB_PASS,
